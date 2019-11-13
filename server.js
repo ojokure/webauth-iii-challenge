@@ -1,16 +1,21 @@
 const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
-const bcrypt = require("bcrypt");
+
+const authRouter = require('./Auth/auth-router');
+const usersRouter = require('./Users/user-router');
 
 const server = express();
 
 server.use(helmet());
 server.use(cors());
-server.use(bcrypt());
 server.use(express.json());
 
+server.use('/api/auth/', authRouter)
+// server.use('/api/user', usersRouter)
 
-server.get('/', (req, res) => {
-    res.send('<h2> Hell Yeah </>')
-})
+server.get("/", (req, res) => {
+  res.send("<h2> Hell Yeah </>");
+});
+
+module.exports = server;
